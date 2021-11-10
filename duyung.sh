@@ -9,4 +9,5 @@
 #SBATCH --account=eecs587f21_class 
 #SBATCH --partition=gpu
 
+make
 { time ./cudaa > out.txt ; } 2> time.txt
