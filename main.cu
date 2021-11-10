@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static const long long n = 4000;
+static const long long n = 1000;
 
 __global__ void MatrixUpdate(double* A, double* B)
 {
@@ -12,15 +12,12 @@ __global__ void MatrixUpdate(double* A, double* B)
 	if (idx < n*n) {
 		long long i = idx / n;
 		long long j = idx % n;
-		for (long long t = 0; t < 9; ++t)
+		if (i == 0 || i == n-1 || j == 0 || j == n-1) B[idx] = A[idx];
+		else 
 		{
-			if (i == 0 || i == n-1 || j == 0 || j == n-1) B[idx] = A[idx];
-			else 
-			{
-				auto t1 = max(min(A[idx-1],A[idx+1]),min(A[idx-n],A[idx+n]));
-				auto t2 = min(max(A[idx-1],A[idx+1]),max(A[idx-n],A[idx+n]));
-				B[idx] = max(min(t1,t2),min(A[idx],max(t1,t2)));
-			}
+			auto t1 = max(min(A[idx-1],A[idx+1]),min(A[idx-n],A[idx+n]));
+			auto t2 = min(max(A[idx-1],A[idx+1]),max(A[idx-n],A[idx+n]));
+			B[idx] = max(min(t1,t2),min(A[idx],max(t1,t2)));
 		}
 	}
 }
