@@ -16,8 +16,8 @@ using namespace std;
 int main(int argc, char *argv[]) {
     // insert code here...
     auto start = high_resolution_clock::now();
-    const long long n = atoi(argv[1]);
-    const int t = atoi(argv[2]);  
+    long long n = atoi(argv[1]);
+    int t = atoi(argv[2]);  
     double A[n][n];
     double B[n][n];
     for (int i = 0; i < n; ++i) {

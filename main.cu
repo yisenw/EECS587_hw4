@@ -5,7 +5,8 @@
 #include <string.h>
 
 using namespace std;
-
+long long n;
+int t;
 
 
 __global__ void MatrixUpdate(double* A, double* B)
@@ -55,8 +56,8 @@ __global__ void MatrixVerify2(double* A, double* C)
 
 int main(int argc, char *argv[])
 {
-    const long long n = atoi(argv[1]);
-    const int t = atoi(argv[2]);    
+    n = atoi(argv[1]);
+    t = atoi(argv[2]);    
 	double* d_A;
 	double* d_B;
     double* d_final;
