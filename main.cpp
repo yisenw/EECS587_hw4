@@ -9,6 +9,7 @@
 #include <chrono>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <chrono>
 #include <cmath>
 using namespace std;
