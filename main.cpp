@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<seconds>(end - start);
-    cout << duration << endl;
+    cout << duration.count() << endl;
     return 0;
 }
 
