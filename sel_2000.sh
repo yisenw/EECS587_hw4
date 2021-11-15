@@ -9,5 +9,5 @@
 #SBATCH --account=eecs587f21_class 
 #SBATCH --partition=gpu
 
-make
-{ time ./cudaa > out.txt ; } 2> time.txt
+bash sel.sh
+{ ./sel 2000 10 > out_sel_2000.txt ; } 2> time.txt

@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 using namespace std;
 
-static const long long n = 1000;
+
 
 __global__ void MatrixUpdate(double* A, double* B)
 {
@@ -51,10 +53,13 @@ __global__ void MatrixVerify2(double* A, double* C)
 
 
 
-int main()
+int main(int argc, char *argv[])
 {
+    const long long n = atoi(argv[1]);
+    const int t = atoi(argv[2]);    
 	double* d_A;
 	double* d_B;
+    double* d_final;
 	double* d_C;
 	long long* d_D;
 	auto size = n * n * sizeof(double);
@@ -78,24 +83,31 @@ int main()
 	cudaEventRecord(start, 0);
 	cudaEventSynchronize(start);
 	cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
-	for (int i = 0; i < 5; ++i)
-	{
+	for (int i = 0; i < t/2; ++i){
 		MatrixUpdate<<< (n*n+255)/256, 256 >>>(d_A, d_B);
 		cudaDeviceSynchronize();
 		MatrixUpdate<<< (n*n+255)/256, 256 >>>(d_B, d_A);
 		cudaDeviceSynchronize();
 	}
-	MatrixVerify1<<< (n*n+255)/256, 256 >>>(d_A, d_C);
+
+    if (t % 2 == 1) {
+        MatrixUpdate<<< (n*n+255)/256, 256 >>>(d_A, d_B);
+		cudaDeviceSynchronize();
+        d_final = d_B;
+    }
+    else d_final = d_A;
+
+	MatrixVerify1<<< (n*n+255)/256, 256 >>>(d_final, d_C);
 	cudaDeviceSynchronize();
 	long long st = 1;
 	while (st <= n*n)
 	{
 		cudaMemcpy(d_D, &st, sizeof(long long), cudaMemcpyHostToDevice);
-		MatrixSum<<< (n*n+255)/256, 256 >>>(d_A, d_C, d_D);
+		MatrixSum<<< (n*n+255)/256, 256 >>>(d_final, d_C, d_D);
 		cudaDeviceSynchronize();
 		st *= 2;
 	}
-	MatrixVerify2<<< (n*n+255)/256, 256 >>>(d_A, d_C);
+	MatrixVerify2<<< (n*n+255)/256, 256 >>>(d_final, d_C);
 	cudaDeviceSynchronize();
 	cudaMemcpy(h_C, d_C, 3 * sizeof(double), cudaMemcpyDeviceToHost);
 	cudaEventRecord(stop, 0);
