@@ -57,8 +57,8 @@ int main(int argc, char *argv[]) {
     cout << "sum: " << (long long)s << "\n";
     
     auto end = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(end - start);
-    cout << "Time: " << duration.count() << "seconds" << endl;
+    auto duration = duration_cast<milliseconds>(end - start);
+    cout << "Time: " << duration.count() << " milliseconds" << endl;
     return 0;
 }
 

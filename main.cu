@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 	cout << "sum: " << (long long) h_C[0] << "\n";
 	cout << "A[n/3, n/3] = " << h_C[1] << "\n";
 	cout << "A[19, 37] = " << h_C[2] << "\n";
-	cout << "Time " << ttime << " ms";
+	cout << "Time: " << ttime << " milliseconds";
 	cudaFree(d_A); cudaFree(d_B); cudaFree(d_C);
 	return 0;
 }
