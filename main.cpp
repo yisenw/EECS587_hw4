@@ -13,14 +13,17 @@
 #include <chrono>
 #include <cmath>
 using namespace std;
-
+using namespace std::chrono;
 int main(int argc, char *argv[]) {
     // insert code here...
-    auto start = high_resolution_clock::now();
+    
     long long n = atoi(argv[1]);
     int t = atoi(argv[2]);  
     double A[n][n];
     double B[n][n];
+    
+    auto start = high_resolution_clock::now();
+    
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             A[i][j] = sin(i*i+j) * sin(i*i+j) + cos(i-j);
