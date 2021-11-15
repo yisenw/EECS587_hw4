@@ -10,4 +10,4 @@
 #SBATCH --partition=gpu
 
 make
-{ time ./cudaa 2000 10 > out_2000.txt ; } 2> time.txt
+{ time ./cudaa 10 > out_2000.txt ; } 2> time.txt

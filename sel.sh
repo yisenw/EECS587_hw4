@@ -1,1 +1,1 @@
-g++ -std=c++14 -o sel main.cpp
+g++ -std=c++11 -o sel main.cpp
