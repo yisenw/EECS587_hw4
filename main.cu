@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 	cudaEventRecord(stop, 0);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&ttime, start, stop);
-	cout << h_C[0] << "\n";
+	cout << (long long) h_C[0] << "\n";
 	cout << h_C[1] << "\n";
 	cout << h_C[2] << "\n";
 	cout << ttime;
