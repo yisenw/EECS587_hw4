@@ -113,10 +113,10 @@ int main(int argc, char *argv[])
 	cudaEventRecord(stop, 0);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&ttime, start, stop);
-	cout << (long long) h_C[0] << "\n";
-	cout << h_C[1] << "\n";
-	cout << h_C[2] << "\n";
-	cout << ttime;
+	cout << "sum: " << (long long) h_C[0] << "\n";
+	cout << "A[n/3, n/3] = " << h_C[1] << "\n";
+	cout << "A[19, 37] = " << h_C[2] << "\n";
+	cout << "Time " << ttime << " ms";
 	cudaFree(d_A); cudaFree(d_B); cudaFree(d_C);
 	return 0;
 }

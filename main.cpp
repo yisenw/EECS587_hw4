@@ -46,19 +46,19 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-    cout << A[19][37] << "\n";
-    cout << A[n/3][n/3] << "\n";
+    cout << "A[19, 37] = " << A[19][37] << "\n";
+    cout << "A[n/3, n/3] = " << A[n/3][n/3] << "\n";
     double s = 0;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             s+=A[i][j];
         }
     }
-    cout << s << "\n";
+    cout << "sum: " << (long long)s << "\n";
     
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<seconds>(end - start);
-    cout << duration.count() << endl;
+    cout << "Time: " << duration.count() << "seconds" << endl;
     return 0;
 }
 
